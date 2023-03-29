@@ -1,0 +1,45 @@
+<!--/*@thymesVar id="env" type="tqs.hw1.envmonitor.data.env.EnvDTO"*/-->
+<!--/*@thymesVar id="query" type="String"*/-->
+<div th:fragment="air-quality">
+
+    <h1>Air Quality</h1>
+
+    <form method="get" action="#" th:action="@{/search}">
+        <input type="search" name="q" th:value="${query}">
+        <button type="submit" name="type" value="current">Current</button>
+        <button type="submit" name="type" value="forecast">Forecast</button>
+    </form>
+
+    <div th:if="${env != null}">
+        <p th:text="${env.location + ', ' + env.country}"></p>
+
+        <table>
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>CO</th>
+                <th>NH3</th>
+                <th>NO</th>
+                <th>NO2</th>
+                <th>O3</th>
+                <th>PM10</th>
+                <th>PM2.5</th>
+                <th>SO2</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${env.items}">
+                <td th:text="${#dates.format(new java.util.Date(1000*item.dt))}"></td>
+                <td th:text="${item.components.co}"></td>
+                <td th:text="${item.components.nh3}"></td>
+                <td th:text="${item.components.no}"></td>
+                <td th:text="${item.components.no2}"></td>
+                <td th:text="${item.components.o3}"></td>
+                <td th:text="${item.components.pm10}"></td>
+                <td th:text="${item.components.pm2_5}"></td>
+                <td th:text="${item.components.so2}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
