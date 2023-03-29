@@ -32,7 +32,7 @@
             </thead>
             <tbody>
             <tr th:each="item : ${env.items}">
-                <td th:text="${#dates.format(new java.util.Date(1000*item.dt))}"></td>
+                <td th:text="${#dates.format(new java.util.Date(1000*item.dt), 'HH:mm:ss dd MMMM')}"></td>
                 <td th:text="${item.components.co}"></td>
                 <td th:text="${item.components.nh3}"></td>
                 <td th:text="${item.components.no}"></td>

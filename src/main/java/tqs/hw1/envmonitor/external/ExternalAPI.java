@@ -32,7 +32,7 @@ public class ExternalAPI {
         // Try to get from OpenWeather Air Pollution API
         try {
             OpenWeatherAirPollutionDTO envData = openWeatherAirPollutionAPI.getCurrent(geoData.getLat(), geoData.getLon());
-            return Utils.from(geoData, envData);
+            return Utils.envDTOfrom(geoData, envData);
         } catch (Exception e) {
             // Next API
         }
@@ -51,7 +51,7 @@ public class ExternalAPI {
         // Try to get from OpenWeather Air Pollution API
         try {
             OpenWeatherAirPollutionDTO envData = openWeatherAirPollutionAPI.getForecast(geoData.getLat(), geoData.getLon());
-            return Utils.from(geoData, envData);
+            return Utils.envDTOfrom(geoData, envData);
         } catch (Exception e) {
             // Next API
         }

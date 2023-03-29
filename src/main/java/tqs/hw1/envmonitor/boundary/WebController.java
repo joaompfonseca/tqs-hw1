@@ -21,7 +21,7 @@ public class WebController {
     }
 
     @GetMapping("/search")
-    public String current(@RequestParam(value = "q", defaultValue = "") String location, @RequestParam(value = "type", defaultValue = "") String type, Model model) {
+    public String search(@RequestParam(value = "q", defaultValue = "") String location, @RequestParam(value = "type", defaultValue = "") String type, Model model) {
         if (type.equals("current")) {
             model.addAttribute("env", envService.getCurrentEnv(location));
         }

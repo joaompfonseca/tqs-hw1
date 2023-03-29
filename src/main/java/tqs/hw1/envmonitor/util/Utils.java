@@ -1,5 +1,7 @@
 package tqs.hw1.envmonitor.util;
 
+import tqs.hw1.envmonitor.cache.Cache;
+import tqs.hw1.envmonitor.data.cache.CacheStatsDTO;
 import tqs.hw1.envmonitor.data.env.EnvComponentsDTO;
 import tqs.hw1.envmonitor.data.env.EnvDTO;
 import tqs.hw1.envmonitor.data.env.EnvItemDTO;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    public static EnvDTO from(OpenWeatherGeocodingDTO geoData, OpenWeatherAirPollutionDTO envData) {
+    public static EnvDTO envDTOfrom(OpenWeatherGeocodingDTO geoData, OpenWeatherAirPollutionDTO envData) {
         EnvDTO env = new EnvDTO();
         env.setLocation(geoData.getLocation());
         env.setCountry(geoData.getCountry());
@@ -33,5 +35,16 @@ public class Utils {
         }
         env.setItems(envItems);
         return env;
+    }
+
+    public static <K, V> CacheStatsDTO cacheStatsDTOfrom(Cache<K, V> cache) {
+        CacheStatsDTO stats = new CacheStatsDTO();
+        stats.setTtl(cache.getTtl());
+        stats.setCapacity(cache.getCapacity());
+        stats.setNRequests(cache.getNRequests());
+        stats.setNHits(cache.getNHits());
+        stats.setNMisses(cache.getNMisses());
+        stats.setNItems(cache.getNItems());
+        return stats;
     }
 }
