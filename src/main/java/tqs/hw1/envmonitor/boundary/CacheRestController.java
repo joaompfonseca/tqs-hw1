@@ -1,5 +1,7 @@
 package tqs.hw1.envmonitor.boundary;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +13,7 @@ import tqs.hw1.envmonitor.util.Utils;
 @RequestMapping("/api/cache")
 public class CacheRestController {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final EnvCache cache;
 
     public CacheRestController(Environment env) {
@@ -19,6 +22,7 @@ public class CacheRestController {
 
     @RequestMapping("/stats")
     public CacheStatsDTO getStats() {
+        logger.info("GET /api/cache/stats");
         return Utils.cacheStatsDTOfrom(cache);
     }
 }
