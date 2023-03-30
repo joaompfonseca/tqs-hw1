@@ -41,7 +41,8 @@
         <webdrivermanager.version>5.3.2</webdrivermanager.version>
         <cucumber.version>7.11.1</cucumber.version>
 
-        <sonar.version>3.9.1.2184</sonar.version>
+        <sonar.organization>tqs-hw1</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <parent>
@@ -126,12 +127,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar.version}</version>
             </plugin>
         </plugins>
     </build>
