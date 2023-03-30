@@ -2,7 +2,7 @@ package tqs.hw1.envmonitor.service;
 
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
-import tqs.hw1.envmonitor.cache.Cache;
+import tqs.hw1.envmonitor.cache.EnvCache;
 import tqs.hw1.envmonitor.data.env.EnvDTO;
 import tqs.hw1.envmonitor.external.ExternalAPI;
 
@@ -10,15 +10,11 @@ import tqs.hw1.envmonitor.external.ExternalAPI;
 public class EnvService {
 
     private final ExternalAPI externalAPI;
-    private final Cache<String, EnvDTO> cache;
+    private final EnvCache cache;
 
     public EnvService(ExternalAPI externalAPI, Environment env) {
         this.externalAPI = externalAPI;
-        this.cache = new Cache<>(env.getProperty("cache.ttl", Long.class), env.getProperty("cache.capacity", Integer.class));
-    }
-
-    public Cache<String, EnvDTO> getCache() {
-        return cache;
+        this.cache = EnvCache.getInstance(env.getProperty("cache.ttl", Long.class), env.getProperty("cache.capacity", Integer.class));
     }
 
     public EnvDTO getCurrentEnv(String location) {

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cache<K, V> {
+public abstract class Cache<K, V> {
     private final Long ttl;
     private final Integer capacity;
     private Integer nRequests;
