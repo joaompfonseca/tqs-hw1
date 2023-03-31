@@ -21,19 +21,19 @@ public class WebController {
     @GetMapping("/")
     public String index() {
         logger.info("GET /");
-        return "layout";
+        return "index";
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(value = "q", defaultValue = "") String location, @RequestParam(value = "type", defaultValue = "") String type, Model model) {
-        logger.info("GET /search?q=" + location + "&type=" + type);
-        if (type.equals("current")) {
-            model.addAttribute("env", envService.getCurrentEnv(location));
+    public String search(@RequestParam(value = "q") String location, Model model) {
+        logger.info("GET /search?q=" + location);
+        if (location == null || location.isBlank()) {
+            logger.info("Fallback to GET /");
+            return index();
         }
-        if (type.equals("forecast")) {
-            model.addAttribute("env", envService.getForecastEnv(location));
-        }
+        model.addAttribute("env_current", envService.getCurrentEnv(location));
+        model.addAttribute("env_forecast", envService.getForecastEnv(location));
         model.addAttribute("query", location);
-        return "layout";
+        return "index";
     }
 }
