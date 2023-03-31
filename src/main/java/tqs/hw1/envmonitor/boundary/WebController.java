@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import tqs.hw1.envmonitor.data.env.EnvDTO;
 import tqs.hw1.envmonitor.service.EnvService;
 
 @Controller
@@ -31,9 +32,16 @@ public class WebController {
             logger.info("Fallback to GET /");
             return index();
         }
+        EnvDTO current = envService.getCurrentEnv(location);
+        EnvDTO forecast = envService.getForecastEnv(location);
+        String locationAndCountry =
+                (current != null) ? current.getLocation() + ", " + current.getCountry()
+              : (forecast != null) ? forecast.getLocation() + ", " + forecast.getCountry()
+              : null;
+        model.addAttribute("query", location);
+        model.addAttribute("location_country", locationAndCountry);
         model.addAttribute("env_current", envService.getCurrentEnv(location));
         model.addAttribute("env_forecast", envService.getForecastEnv(location));
-        model.addAttribute("query", location);
         return "index";
     }
 }

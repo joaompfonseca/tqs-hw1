@@ -15,94 +15,93 @@
 <body>
 <div class="container">
 
-    <div class="row m-3">
+    <div class="row my-3">
         <div class="col-12">
             <h1>TQS HW1 - Environment Monitor</h1>
         </div>
     </div>
 
-    <form class="row m-3" method="get" action="#" th:action="@{/search}">
+    <form class="row my-3" method="get" action="#" th:action="@{/search}">
         <div class="col-auto">
-            <label class="col-form-label" for="q">Insert a Location:</label>
+            <label id="search_label" for="search_input" class="col-form-label">Insert a Location:</label>
         </div>
         <div class="col-auto">
-            <input class="form-control" type="text" id="q" name="q" required th:value="${query}">
+            <input id="search_input" class="form-control" type="text" name="q" required th:value="${query}">
         </div>
         <div class="col-auto">
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button id="search_button" class="btn btn-primary" type="submit">Search</button>
         </div>
 
         <!-- Location and Country -->
 
-        <div class="col-auto" th:if="${env_current != null}">
-            <label class="col-form-label"
-                   th:utext="${'Showing results for <b>' + env_current.location + ', ' + env_current.country} + '</b>'"></label>
-        </div>
-        <div class="col-auto" th:if="${env_current == null && env_forecast != null}">
-            <label class="col-form-label"
-                   th:utext="${'Showing results for <b>' + env_forecast.location + ', ' + env_forecast.country} + '</b>'"></label>
+        <div class="col-auto" th:if="${location_country != null}">
+            <label id="search_results" class="col-form-label"
+                   th:utext="${'Showing results for <b>' + location_country + '</b>'}"></label>
         </div>
     </form>
 
-    <div class="row m-3">
+    <div class="row my-3">
 
         <!-- Current Environment -->
 
-        <div class="col-6">
-            <h2>Current Air Quality</h2>
+        <div class="col-12 mb-3">
+            <h2 id="current_header">Current Air Quality</h2>
         </div>
 
-        <div class="col-12" th:if="${env_current == null}">
-            <p>Nothing to show here.</p>
+        <div class="col-12 mb-3" th:if="${env_current == null}">
+            <p id="current_empty">Nothing to show here.</p>
         </div>
         <div class="col-12" th:if="${env_current != null}">
-            <table class="table">
+            <table id="current_table" class="table">
                 <thead>
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col">CO</th>
-                    <th scope="col">NH3</th>
-                    <th scope="col">NO</th>
-                    <th scope="col">NO2</th>
-                    <th scope="col">O3</th>
-                    <th scope="col">PM10</th>
-                    <th scope="col">PM2.5</th>
-                    <th scope="col">SO2</th>
+                    <th class="text-end" scope="col">CO (μg/m³)</th>
+                    <th class="text-end" scope="col">NH3 (μg/m³)</th>
+                    <th class="text-end" scope="col">NO (μg/m³)</th>
+                    <th class="text-end" scope="col">NO2 (μg/m³)</th>
+                    <th class="text-end" scope="col">O3 (μg/m³)</th>
+                    <th class="text-end" scope="col">PM10 (μg/m³)</th>
+                    <th class="text-end" scope="col">PM2.5 (μg/m³)</th>
+                    <th class="text-end" scope="col">SO2 (μg/m³)</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="item : ${env_current.items}">
                     <td class="text-capitalize" th:text="${#dates.format(new java.util.Date(item.dt), 'E, d')}"></td>
                     <td th:text="${#dates.format(new java.util.Date(item.dt), 'HH:mm:ss')}"></td>
-                    <td th:text="${item.components.co}"></td>
-                    <td th:text="${item.components.nh3}"></td>
-                    <td th:text="${item.components.no}"></td>
-                    <td th:text="${item.components.no2}"></td>
-                    <td th:text="${item.components.o3}"></td>
-                    <td th:text="${item.components.pm10}"></td>
-                    <td th:text="${item.components.pm2_5}"></td>
-                    <td th:text="${item.components.so2}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.co, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.nh3, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no2, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.o3, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.pm10, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.pm2_5, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.so2, 1, 2)}"></td>
                 </tr>
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="row my-3">
 
         <!-- Forecast Environment -->
 
-        <div class="col-12">
-            <h2>Forecast Air Quality</h2>
+        <div class="col-12 mb-3">
+            <h2 id="forecast_header">Forecast Air Quality</h2>
         </div>
 
         <div class="col-12" th:if="${env_forecast == null}">
-            <p>Nothing to show here.</p>
+            <p id="forecast_empty">Nothing to show here.</p>
         </div>
-        <div class="col-12" th:if="${env_forecast != null}">
-            <canvas style="width: 100%" id="env_forecast_chart"></canvas>
+        <div class="col-12 mb-3" th:if="${env_forecast != null}">
+            <canvas id="forecast_chart" style="width: 100%"></canvas>
             <script type="text/javascript" th:inline="javascript">
                 env_forecast = [[${env_forecast.items}]];
                 // Get x-axis
-                let xx = env_forecast.map(item => moment(new Date(item.dt)).format("dddd, D HH:mm:ss", "uk"));
+                let xx = env_forecast.map(item => moment(new Date(item.dt)).format("dddd, D HH:mm:ss"));
                 // Get y-axis
                 let co = env_forecast.map(item => item.components.co);
                 let nh3 = env_forecast.map(item => item.components.nh3);
@@ -112,7 +111,7 @@
                 let pm10 = env_forecast.map(item => item.components.pm10);
                 let pm2_5 = env_forecast.map(item => item.components.pm2_5);
                 let so2 = env_forecast.map(item => item.components.so2);
-                new Chart("env_forecast_chart", {
+                new Chart("forecast_chart", {
                     type: "line",
                     data: {
                         labels: xx,
@@ -139,13 +138,6 @@
                                     autoSkip: true,
                                     maxTicksLimit: 12
                                 }
-                            }],
-                            yAxes: [{
-                                display: true,
-                                title: {
-                                    display: true,
-                                    text: "μg/m³"
-                                }
                             }]
                         },
                         tooltips: {
@@ -158,6 +150,38 @@
                     }
                 });
             </script>
+        </div>
+        <div class="col-12" th:if="${env_forecast != null}">
+            <table id="forecast_table" class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th class="text-end" scope="col">CO (μg/m³)</th>
+                    <th class="text-end" scope="col">NH3 (μg/m³)</th>
+                    <th class="text-end" scope="col">NO (μg/m³)</th>
+                    <th class="text-end" scope="col">NO2 (μg/m³)</th>
+                    <th class="text-end" scope="col">O3 (μg/m³)</th>
+                    <th class="text-end" scope="col">PM10 (μg/m³)</th>
+                    <th class="text-end" scope="col">PM2.5 (μg/m³)</th>
+                    <th class="text-end" scope="col">SO2 (μg/m³)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${env_forecast.items}">
+                    <td class="text-capitalize" th:text="${#dates.format(new java.util.Date(item.dt), 'E, d')}"></td>
+                    <td th:text="${#dates.format(new java.util.Date(item.dt), 'HH:mm:ss')}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.co, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.nh3, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no2, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.o3, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.pm10, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.pm2_5, 1, 2)}"></td>
+                    <td class="text-end" th:text="${#numbers.formatDecimal(item.components.so2, 1, 2)}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
