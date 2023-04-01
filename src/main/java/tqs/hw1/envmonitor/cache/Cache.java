@@ -34,6 +34,9 @@ public abstract class Cache<K, V> {
                 cache.remove(key);
             }
         }
+        else {
+            nMisses++;
+        }
         return res;
     }
 
