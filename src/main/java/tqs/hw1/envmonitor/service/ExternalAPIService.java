@@ -10,7 +10,7 @@ import tqs.hw1.envmonitor.data.openweather.OpenWeatherGeocodingDTO;
 import tqs.hw1.envmonitor.external.openmeteo.OpenMeteoAirQualityAPI;
 import tqs.hw1.envmonitor.external.openweather.OpenWeatherAirPollutionAPI;
 import tqs.hw1.envmonitor.external.openweather.OpenWeatherGeocodingAPI;
-import tqs.hw1.envmonitor.util.Utils;
+import tqs.hw1.envmonitor.util.ConverterUtils;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class ExternalAPIService {
         // Try to get from OpenWeather Air Pollution API
         try {
             OpenWeatherAirPollutionDTO envData = openWeatherAirPollutionAPI.getCurrent(geoData.getLat(), geoData.getLon());
-            EnvDTO res = Utils.envDTOfrom(geoData, envData);
+            EnvDTO res = ConverterUtils.envDTOfrom(geoData, envData);
             logger.info("Current: Got " + res.getItems().size() + " data items from OpenWeather Air Pollution API");
             return res;
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class ExternalAPIService {
         // Try to get from OpenMeteo Air Quality API
         try {
             OpenMeteoAirQualityDTO envData = openMeteoAirQualityAPI.getForecast(geoData.getLat(), geoData.getLon());
-            EnvDTO res = Utils.currentEnvDTOfrom(Utils.envDTOfrom(geoData, envData));
+            EnvDTO res = ConverterUtils.currentEnvDTOfrom(ConverterUtils.envDTOfrom(geoData, envData));
             logger.info("Current: Got " + res.getItems().size() + " data items from OpenMeteo Air Quality API");
             return res;
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class ExternalAPIService {
         // Try to get from OpenWeather Air Pollution API
         try {
             OpenWeatherAirPollutionDTO envData = openWeatherAirPollutionAPI.getForecast(geoData.getLat(), geoData.getLon());
-            EnvDTO res = Utils.envDTOfrom(geoData, envData);
+            EnvDTO res = ConverterUtils.envDTOfrom(geoData, envData);
             logger.info("Forecast: Got " + res.getItems().size() + " data items from OpenWeather Air Pollution API");
             return res;
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class ExternalAPIService {
         // Try to get from OpenMeteo Air Quality API
         try {
             OpenMeteoAirQualityDTO envData = openMeteoAirQualityAPI.getForecast(geoData.getLat(), geoData.getLon());
-            EnvDTO res = Utils.envDTOfrom(geoData, envData);
+            EnvDTO res = ConverterUtils.envDTOfrom(geoData, envData);
             logger.info("Forecast: Got " + res.getItems().size() + " data items from OpenMeteo Air Quality API");
             return res;
         } catch (Exception e) {

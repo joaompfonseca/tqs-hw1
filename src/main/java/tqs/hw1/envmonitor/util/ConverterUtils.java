@@ -13,7 +13,7 @@ import tqs.hw1.envmonitor.data.openweather.OpenWeatherGeocodingDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class ConverterUtils {
     public static EnvDTO envDTOfrom(OpenWeatherGeocodingDTO geoData, OpenWeatherAirPollutionDTO envData) {
         EnvDTO env = new EnvDTO();
         env.setLocation(geoData.getLocation());

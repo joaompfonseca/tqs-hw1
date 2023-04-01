@@ -2,7 +2,6 @@ package tqs.hw1.envmonitor.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tqs.hw1.envmonitor.cache.EnvCache;
 import tqs.hw1.envmonitor.data.env.EnvDTO;
@@ -14,9 +13,9 @@ public class EnvService {
     private final ExternalAPIService externalAPIService;
     private final EnvCache cache;
 
-    public EnvService(ExternalAPIService externalAPIService, Environment env) {
+    public EnvService(ExternalAPIService externalAPIService) {
         this.externalAPIService = externalAPIService;
-        this.cache = EnvCache.getInstance(env.getProperty("cache.ttl", Long.class), env.getProperty("cache.capacity", Integer.class));
+        this.cache = EnvCache.getInstance();
     }
 
     public EnvDTO getCurrentEnv(String location) {
