@@ -1,8 +1,10 @@
 package tqs.hw1.envmonitor.data.openweather;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class OpenWeatherAirPollutionComponentsDTO {
     private Double co;
     private Double nh3;

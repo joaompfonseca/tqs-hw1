@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ConfigUtilsTest {
 
     @Test
-    void whenGetExisting_thenValue() {
+    void whenGetExistingProperty_thenValue() {
         String value = ConfigUtils.getProperty("key");
 
         assertThat(value).isEqualTo("value");

@@ -21,7 +21,7 @@ public class ConverterUtils {
         List<EnvItemDTO> envItems = new ArrayList<>();
         for (OpenWeatherAirPollutionItemDTO item : envData.getList()) {
             EnvItemDTO envItem = new EnvItemDTO();
-            envItem.setDt(1000*item.getDt());
+            envItem.setDt(1000 * item.getDt());
             EnvComponentsDTO envComponents = new EnvComponentsDTO();
             envComponents.setCo(item.getComponents().getCo());
             envComponents.setNh3(item.getComponents().getNh3());
@@ -45,7 +45,7 @@ public class ConverterUtils {
         List<EnvItemDTO> envItems = new ArrayList<>();
         for (int i = 0; i < envData.getHourly().getTime().size(); i++) {
             EnvItemDTO envItem = new EnvItemDTO();
-            envItem.setDt(1000*envData.getHourly().getTime().get(i));
+            envItem.setDt(1000 * envData.getHourly().getTime().get(i));
             EnvComponentsDTO envComponents = new EnvComponentsDTO();
             envComponents.setCo(envData.getHourly().getCarbon_monoxide().get(i));
             envComponents.setNh3(envData.getHourly().getAmmonia().get(i));
@@ -62,8 +62,21 @@ public class ConverterUtils {
     }
 
     public static EnvDTO currentEnvDTOfrom(EnvDTO envData) {
-        envData.getItems().removeIf(item -> item.getDt() < System.currentTimeMillis() - 60*60*1000);
-        envData.setItems(envData.getItems().subList(0, 1));
+        List<EnvItemDTO> envItems = envData.getItems();
+        // There are no items or only one item
+        if (envItems.size() <= 1) {
+            return envData;
+        }
+        // There is more than one item
+        for (int i = 1; i < envItems.size(); i++) {
+            // If the next item is in the future, return the previous item
+            if (envItems.get(i).getDt() > System.currentTimeMillis()) {
+                envData.setItems(envItems.subList(i - 1, i));
+                return envData;
+            }
+        }
+        // If all items are in the past, return the last item
+        envData.setItems(envItems.subList(envItems.size() - 1, envItems.size()));
         return envData;
     }
 
