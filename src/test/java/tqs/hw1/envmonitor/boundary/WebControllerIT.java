@@ -8,6 +8,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -27,7 +28,10 @@ public class WebControllerIT {
     void whenIndex_thenEmptyIndex() throws Exception {
         mvc.perform(get("/").contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("location_country", nullValue()))
+                .andExpect(model().attribute("env_current", nullValue()))
+                .andExpect(model().attribute("env_forecast", nullValue()));
     }
 
     @Test
@@ -36,7 +40,10 @@ public class WebControllerIT {
 
         mvc.perform(get("/search").param("q", query).contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("location_country", nullValue()))
+                .andExpect(model().attribute("env_current", nullValue()))
+                .andExpect(model().attribute("env_forecast", nullValue()));
     }
 
     @Test
@@ -45,7 +52,23 @@ public class WebControllerIT {
 
         mvc.perform(get("/search").param("q", query).contentType(MediaType.TEXT_HTML))
                 .andExpect(status().isOk())
-                .andExpect(view().name("index"));
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("location_country", nullValue()))
+                .andExpect(model().attribute("env_current", nullValue()))
+                .andExpect(model().attribute("env_forecast", nullValue()));
+    }
+
+    @Test
+    void givenInvalidLocation_whenSearch_thenEmptyIndex() throws Exception {
+        String query = "InvalidLocation";
+
+        mvc.perform(get("/search").param("q", query).contentType(MediaType.TEXT_HTML))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+                .andExpect(model().attribute("query", "InvalidLocation"))
+                .andExpect(model().attribute("location_country", nullValue()))
+                .andExpect(model().attribute("env_current", nullValue()))
+                .andExpect(model().attribute("env_forecast", nullValue()));
     }
 
     @Test
