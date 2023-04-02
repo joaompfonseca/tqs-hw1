@@ -28,14 +28,21 @@ public class EnvRestControllerTest {
     @BeforeEach
     void setUp() {
         RestAssuredMockMvc.mockMvc(mvc);
+        // Current Env
+        when(envService.getCurrentEnv("Aveiro"))
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+        when(envService.getCurrentEnv("InvalidLocation"))
+                .thenReturn(null);
+        // Forecast Env
+        when(envService.getForecastEnv("Aveiro"))
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+        when(envService.getForecastEnv("InvalidLocation"))
+                .thenReturn(null);
     }
 
     @Test
     void givenAveiro_whenGetCurrentEnv_thenStatus200() {
         String location = "Aveiro";
-
-        when(envService.getCurrentEnv("Aveiro"))
-            .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
 
         RestAssuredMockMvc
             .given()
@@ -61,9 +68,6 @@ public class EnvRestControllerTest {
     void givenInvalidLocation_whenGetCurrentEnv_thenStatus404() {
         String location = "InvalidLocation";
 
-        when(envService.getCurrentEnv("InvalidLocation"))
-            .thenReturn(null);
-
         RestAssuredMockMvc
             .given()
             .when()
@@ -75,9 +79,6 @@ public class EnvRestControllerTest {
     @Test
     void givenAveiro_whenGetForecastEnv_thenStatus200() {
         String location = "Aveiro";
-
-        when(envService.getForecastEnv("Aveiro"))
-            .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
 
         RestAssuredMockMvc
             .given()
@@ -102,9 +103,6 @@ public class EnvRestControllerTest {
     @Test
     void givenInvalidLocation_whenGetForecastEnv_thenStatus404() {
         String location = "InvalidLocation";
-
-        when(envService.getForecastEnv("InvalidLocation"))
-            .thenReturn(null);
 
         RestAssuredMockMvc
             .given()
