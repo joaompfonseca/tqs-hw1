@@ -1,6 +1,6 @@
 package tqs.hw1.envmonitor.util;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tqs.hw1.envmonitor.cache.Cache;
 import tqs.hw1.envmonitor.data.cache.CacheStatsDTO;
@@ -24,29 +24,26 @@ import java.util.List;
 
 public class ConverterUtilsTest {
 
-    private static OpenWeatherGeocodingDTO owGeocodingDTO;
-    private static OpenWeatherAirPollutionDTO owAirPollutionDTO;
-    private static OpenWeatherAirPollutionItemDTO[] owAirPollutionItemDTOList;
-    private static OpenWeatherAirPollutionComponentsDTO[] owAirPollutionComponentsDTOList;
-    private static OpenMeteoAirQualityDTO omAirQualityDTO;
-    private static OpenMeteoAirQualityHourlyDTO omAirQualityHourlyDTO;
+    private OpenWeatherGeocodingDTO owGeocodingDTO;
+    private OpenWeatherAirPollutionDTO owAirPollutionDTO;
+    private OpenMeteoAirQualityDTO omAirQualityDTO;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeEach
+    void setUp() {
         // OpenWeather Geocoding DTO
         owGeocodingDTO = new OpenWeatherGeocodingDTO(40.640496, -8.6537841, "Aveiro", "PT");
         // OpenWeather Air Pollution DTO
-        owAirPollutionComponentsDTOList = new OpenWeatherAirPollutionComponentsDTO[]{
+        OpenWeatherAirPollutionComponentsDTO[] owAirPollutionComponentsDTOList = new OpenWeatherAirPollutionComponentsDTO[]{
                 new OpenWeatherAirPollutionComponentsDTO(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0),
                 new OpenWeatherAirPollutionComponentsDTO(10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0)
         };
-        owAirPollutionItemDTOList = new OpenWeatherAirPollutionItemDTO[]{
+        OpenWeatherAirPollutionItemDTO[] owAirPollutionItemDTOList = new OpenWeatherAirPollutionItemDTO[]{
                 new OpenWeatherAirPollutionItemDTO(0L, owAirPollutionComponentsDTOList[0]),
                 new OpenWeatherAirPollutionItemDTO(1L, owAirPollutionComponentsDTOList[1])
         };
         owAirPollutionDTO = new OpenWeatherAirPollutionDTO(List.of(owAirPollutionItemDTOList));
         // OpenMeteo Air Quality DTO
-        omAirQualityHourlyDTO = new OpenMeteoAirQualityHourlyDTO(
+        OpenMeteoAirQualityHourlyDTO omAirQualityHourlyDTO = new OpenMeteoAirQualityHourlyDTO(
                 List.of(new Long[]{0L, 1L}),
                 List.of(new Double[]{1.0, 10.0}),
                 List.of(new Double[]{2.0, 20.0}),
