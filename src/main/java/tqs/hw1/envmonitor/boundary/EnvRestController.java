@@ -2,10 +2,9 @@ package tqs.hw1.envmonitor.boundary;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import tqs.hw1.envmonitor.data.env.EnvDTO;
 import tqs.hw1.envmonitor.service.EnvService;
 
@@ -23,12 +22,22 @@ public class EnvRestController {
     @GetMapping("/current")
     public EnvDTO getCurrentEnv(@RequestParam("q") String location) {
         logger.info("GET /api/env/current?q=" + location);
-        return envService.getCurrentEnv(location);
+        EnvDTO current = envService.getCurrentEnv(location);
+        if (current == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            return current;
+        }
     }
 
     @GetMapping("/forecast")
     public EnvDTO getForecastEnv(@RequestParam("q") String location) {
         logger.info("GET /api/env/forecast?q=" + location);
-        return envService.getForecastEnv(location);
+        EnvDTO forecast = envService.getForecastEnv(location);
+        if (forecast == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        } else {
+            return forecast;
+        }
     }
 }

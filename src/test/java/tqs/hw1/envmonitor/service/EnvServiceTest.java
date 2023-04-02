@@ -27,12 +27,12 @@ public class EnvServiceTest {
     void setUp() {
         // Current Env
         when(externalAPIService.getCurrentEnv("Aveiro"))
-                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
         when(externalAPIService.getCurrentEnv("InvalidLocation"))
                 .thenReturn(null);
         // Forecast Env
         when(externalAPIService.getForecastEnv("Aveiro"))
-                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
         when(externalAPIService.getForecastEnv("InvalidLocation"))
                 .thenReturn(null);
     }
