@@ -21,8 +21,9 @@ public class EnvRestController {
 
     @GetMapping("/current")
     public EnvDTO getCurrentEnv(@RequestParam("q") String location) {
-        logger.info("GET /api/env/current?q=" + location);
-        EnvDTO current = envService.getCurrentEnv(location);
+        String sanitizedLocation = location.replaceAll("[\n\r]", "_");
+        logger.info("GET /api/env/current?q=" + sanitizedLocation);
+        EnvDTO current = envService.getCurrentEnv(sanitizedLocation);
         if (current == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
@@ -32,8 +33,9 @@ public class EnvRestController {
 
     @GetMapping("/forecast")
     public EnvDTO getForecastEnv(@RequestParam("q") String location) {
-        logger.info("GET /api/env/forecast?q=" + location);
-        EnvDTO forecast = envService.getForecastEnv(location);
+        String sanitizedLocation = location.replaceAll("[\n\r]", "_");
+        logger.info("GET /api/env/forecast?q=" + sanitizedLocation);
+        EnvDTO forecast = envService.getForecastEnv(sanitizedLocation);
         if (forecast == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } else {
