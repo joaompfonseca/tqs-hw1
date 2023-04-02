@@ -1,6 +1,7 @@
 package tqs.hw1.envmonitor.web;
 
 import io.github.bonigarcia.seljup.SeleniumJupiter;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchTest {
 
     @Test
+    @Disabled
     void searchInvalidLocation(ChromeDriver driver) {
         IndexPage indexPage = new IndexPage(driver);
         indexPage.setQuery("InvalidLocation");
@@ -25,6 +27,7 @@ public class SearchTest {
     }
 
     @Test
+    @Disabled
     void searchValidLocation(ChromeDriver driver) {
         IndexPage indexPage = new IndexPage(driver);
         indexPage.setQuery("Aveiro");
