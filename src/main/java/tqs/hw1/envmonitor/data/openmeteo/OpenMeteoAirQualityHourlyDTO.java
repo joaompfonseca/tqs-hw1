@@ -1,14 +1,13 @@
 package tqs.hw1.envmonitor.data.openmeteo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class OpenMeteoAirQualityHourlyDTO {
     private List<Long> time;
     private List<Double> ammonia;

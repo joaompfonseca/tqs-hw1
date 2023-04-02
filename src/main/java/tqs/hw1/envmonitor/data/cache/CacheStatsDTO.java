@@ -1,8 +1,11 @@
 package tqs.hw1.envmonitor.data.cache;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class CacheStatsDTO {
     private Long ttl;
     private Integer capacity;

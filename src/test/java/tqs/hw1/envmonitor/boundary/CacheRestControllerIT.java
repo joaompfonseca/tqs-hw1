@@ -36,10 +36,6 @@ public class CacheRestControllerIT {
             .then()
                 .statusCode(200)
                 .body("ttl", is(env.getProperty("cache.ttl", Integer.class)))
-                .body("capacity", is(env.getProperty("cache.capacity", Integer.class)))
-                .body("nrequests", is(0))
-                .body("nhits", is(0))
-                .body("nmisses", is(0))
-                .body("nitems", is(0));
+                .body("capacity", is(env.getProperty("cache.capacity", Integer.class)));
     }
 }

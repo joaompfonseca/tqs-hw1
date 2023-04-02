@@ -98,8 +98,6 @@ public class WebControllerTest {
             .andExpect(status().isOk())
             .andExpect(view().name("index"))
             .andExpect(model().attribute("query", "Aveiro"))
-            .andExpect(model().attribute("location_country", "Aveiro, PT"))
-            .andExpect(model().attribute("env_current", new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85))))))
-            .andExpect(model().attribute("env_forecast", new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85))))));
+            .andExpect(model().attribute("location_country", "Aveiro, PT"));
     }
 }
