@@ -16,7 +16,6 @@ public class IndexPage {
     public IndexPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        driver.get("http://localhost:8080/");
     }
 
     public void setQuery(String query) {
