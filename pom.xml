@@ -36,10 +36,8 @@
         <spring-cloud.version>2021.0.6</spring-cloud.version>
 
         <lombok.version>1.18.26</lombok.version>
-
         <selenium.version>4.8.1</selenium.version>
         <webdrivermanager.version>5.3.2</webdrivermanager.version>
-        <selenium-jupiter.version>4.3.3</selenium-jupiter.version>
         <cucumber.version>7.11.1</cucumber.version>
 
         <jacoco.version>0.8.8</jacoco.version>
@@ -93,7 +91,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -104,7 +101,6 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
@@ -119,12 +115,6 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>selenium-jupiter</artifactId>
-            <version>${selenium-jupiter.version}</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
