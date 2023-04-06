@@ -27,7 +27,7 @@ class EnvItemDTOTest {
     @Test
     void setters() {
         dto.setDt(1L);
-        assertThat(dto.getAqi()).isEqualTo(4);
+        dto.setAqi(4);
         dto.setComponents(new EnvComponentsDTO(1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0));
 
         assertThat(dto.getDt()).isEqualTo(1L);
