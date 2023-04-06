@@ -21,24 +21,43 @@
         </div>
     </div>
 
-    <form class="row my-3" method="get" action="#" th:action="@{/search}">
-        <div class="col-auto">
-            <label id="search_label" for="search_input" class="col-form-label">Insert a Location:</label>
-        </div>
-        <div class="col-auto">
-            <input id="search_input" class="form-control" type="text" name="q" required th:value="${query}">
-        </div>
-        <div class="col-auto">
-            <button id="search_button" class="btn btn-primary" type="submit">Search</button>
-        </div>
+    <div class="row my-3">
+        <form class="col-6 d-inline-flex align-items-center" method="get" action="#" th:action="@{/search}">
+                <label id="search_label" for="search_input" class="col-form-label me-2">Insert a Location:</label>
+                <input id="search_input" class="form-control w-25 me-2" type="text" name="q" required th:value="${query}">
+                <button id="search_button" class="btn btn-primary me-2" type="submit">Search</button>
+                <!-- Location and Country -->
+                <label th:if="${location_country != null}" id="search_results" class="col-form-label"
+                       th:utext="${'Showing results for <b>' + location_country + '</b>'}"></label>
+        </form>
 
-        <!-- Location and Country -->
+        <!-- Cache Stats -->
 
-        <div class="col-auto" th:if="${location_country != null}">
-            <label id="search_results" class="col-form-label"
-                   th:utext="${'Showing results for <b>' + location_country + '</b>'}"></label>
+        <div class="col-6">
+            <table id="cache_table" class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th class="text-end" scope="col">Time to Live (TTL)</th>
+                    <th class="text-end" scope="col">Nr. Items</th>
+                    <th class="text-end" scope="col">Nr. Requests</th>
+                    <th class="text-end" scope="col">Nr. Hits</th>
+                    <th class="text-end" scope="col">Nr. Misses</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><b>Cache Stats</b></td>
+                    <td class="text-end" th:text="${cache.ttl}"></td>
+                    <td class="text-end" th:text="${cache.NItems}/${cache.capacity}"></td>
+                    <td class="text-end" th:text="${cache.NRequests}"></td>
+                    <td class="text-end" th:text="${cache.NHits}"></td>
+                    <td class="text-end" th:text="${cache.NMisses}"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-    </form>
+    </div>
 
     <div class="row my-3">
 
@@ -57,7 +76,7 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th class="text-end" scope="col">CO (μg/m³)</th>
+                    <th scope="col">CO (μg/m³)</th>
                     <th class="text-end" scope="col">NH3 (μg/m³)</th>
                     <th class="text-end" scope="col">NO (μg/m³)</th>
                     <th class="text-end" scope="col">NO2 (μg/m³)</th>
