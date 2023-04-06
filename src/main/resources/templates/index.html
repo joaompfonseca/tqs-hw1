@@ -49,7 +49,7 @@
                 <tr>
                     <td><b>Cache Stats</b></td>
                     <td class="text-end" th:text="${cache.ttl}"></td>
-                    <td class="text-end" th:text="${cache.NItems}/${cache.capacity}"></td>
+                    <td class="text-end" th:text="${cache.NItems + '/' + cache.capacity}"></td>
                     <td class="text-end" th:text="${cache.NRequests}"></td>
                     <td class="text-end" th:text="${cache.NHits}"></td>
                     <td class="text-end" th:text="${cache.NMisses}"></td>
