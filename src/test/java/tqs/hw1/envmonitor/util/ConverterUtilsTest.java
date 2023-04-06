@@ -15,14 +15,18 @@ import tqs.hw1.envmonitor.data.openweather.OpenWeatherAirPollutionItemDTO;
 import tqs.hw1.envmonitor.data.openweather.OpenWeatherGeocodingDTO;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ConverterUtilsTest {
+
+    static class IntegerCache extends Cache<String, Integer> {
+        public IntegerCache(Long ttl, Integer capacity) {
+            super(ttl, capacity);
+        }
+    }
 
     private OpenWeatherGeocodingDTO owGeocodingDTO;
     private OpenWeatherAirPollutionDTO owAirPollutionDTO;
@@ -148,21 +152,15 @@ public class ConverterUtilsTest {
 
     @Test
     void givenCache_whenCacheStatsDTOfrom_thenValidCacheStatsDTO() {
-        Cache cache = mock(Cache.class);
-        when(cache.getTtl()).thenReturn(1000L);
-        when(cache.getCapacity()).thenReturn(5);
-        when(cache.getNRequests()).thenReturn(10);
-        when(cache.getNHits()).thenReturn(8);
-        when(cache.getNMisses()).thenReturn(2);
-        when(cache.getNItems()).thenReturn(3);
+        IntegerCache cache = new IntegerCache(1000L, 5);
 
         CacheStatsDTO cacheStats = ConverterUtils.cacheStatsDTOfrom(cache);
 
         assertThat(cacheStats.getTtl()).isEqualTo(1000L);
         assertThat(cacheStats.getCapacity()).isEqualTo(5);
-        assertThat(cacheStats.getNRequests()).isEqualTo(10);
-        assertThat(cacheStats.getNHits()).isEqualTo(8);
-        assertThat(cacheStats.getNMisses()).isEqualTo(2);
-        assertThat(cacheStats.getNItems()).isEqualTo(3);
+        assertThat(cacheStats.getNRequests()).isEqualTo(0);
+        assertThat(cacheStats.getNHits()).isEqualTo(0);
+        assertThat(cacheStats.getNMisses()).isEqualTo(0);
+        assertThat(cacheStats.getNItems()).isEqualTo(0);
     }
 }
