@@ -32,12 +32,12 @@ public class WebControllerTest {
     void setUp() {
         // Current Env
         when(envService.getCurrentEnv("Aveiro"))
-                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, 4, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
         when(envService.getCurrentEnv("InvalidLocation"))
                 .thenReturn(null);
         // Forecast Env
         when(envService.getForecastEnv("Aveiro"))
-                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
+                .thenReturn(new EnvDTO("Aveiro", "PT", List.of(new EnvItemDTO(1680392189000L, 4, new EnvComponentsDTO(216.96, 0.78, 0.0, 2.25, 98.71, 3.76, 1.87, 1.85)))));
         when(envService.getForecastEnv("InvalidLocation"))
                 .thenReturn(null);
     }

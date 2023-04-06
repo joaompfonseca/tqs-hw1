@@ -8,5 +8,6 @@ import lombok.*;
 @Setter
 public class EnvItemDTO {
     private Long dt;
+    private Integer aqi;
     private EnvComponentsDTO components;
 }

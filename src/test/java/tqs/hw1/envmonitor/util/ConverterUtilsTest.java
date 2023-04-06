@@ -104,7 +104,7 @@ public class ConverterUtilsTest {
 
     @Test
     void givenEnvDTOWithOneItem_whenCurrentEnvDTOfrom_thenSameEnvDTO() {
-        EnvItemDTO envItem = new EnvItemDTO(0L, new EnvComponentsDTO());
+        EnvItemDTO envItem = new EnvItemDTO(0L, 5, new EnvComponentsDTO());
         EnvDTO env = new EnvDTO("Aveiro", "PT", List.of(envItem));
 
         EnvDTO currentEnv = ConverterUtils.currentEnvDTOfrom(env);
@@ -115,10 +115,10 @@ public class ConverterUtilsTest {
     @Test
     void givenCurrentTimeAndEnvDTOWithManyItems_whenCurrentEnvDTOfrom_thenCurrentEnvDTO() {
         long currentTime = System.currentTimeMillis();
-        EnvItemDTO envItem1 = new EnvItemDTO(currentTime - 2000L, new EnvComponentsDTO());
-        EnvItemDTO envItem2 = new EnvItemDTO(currentTime - 1000L, new EnvComponentsDTO());
-        EnvItemDTO envItem3 = new EnvItemDTO(currentTime + 1000L, new EnvComponentsDTO());
-        EnvItemDTO envItem4 = new EnvItemDTO(currentTime + 2000L, new EnvComponentsDTO());
+        EnvItemDTO envItem1 = new EnvItemDTO(currentTime - 2000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem2 = new EnvItemDTO(currentTime - 1000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem3 = new EnvItemDTO(currentTime + 1000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem4 = new EnvItemDTO(currentTime + 2000L, 5, new EnvComponentsDTO());
         EnvDTO env = new EnvDTO("Aveiro", "PT", new ArrayList<>(List.of(envItem1, envItem2, envItem3, envItem4)));
 
         EnvDTO currentEnv = ConverterUtils.currentEnvDTOfrom(env);
@@ -132,10 +132,10 @@ public class ConverterUtilsTest {
     @Test
     void givenCurrentTimeAndEnvDTOWithManyItemsInThePast_whenCurrentEnvDTOfrom_thenLastEnvDTO() {
         long currentTime = System.currentTimeMillis();
-        EnvItemDTO envItem1 = new EnvItemDTO(currentTime - 4000L, new EnvComponentsDTO());
-        EnvItemDTO envItem2 = new EnvItemDTO(currentTime - 3000L, new EnvComponentsDTO());
-        EnvItemDTO envItem3 = new EnvItemDTO(currentTime - 2000L, new EnvComponentsDTO());
-        EnvItemDTO envItem4 = new EnvItemDTO(currentTime - 1000L, new EnvComponentsDTO());
+        EnvItemDTO envItem1 = new EnvItemDTO(currentTime - 4000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem2 = new EnvItemDTO(currentTime - 3000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem3 = new EnvItemDTO(currentTime - 2000L, 5, new EnvComponentsDTO());
+        EnvItemDTO envItem4 = new EnvItemDTO(currentTime - 1000L, 5, new EnvComponentsDTO());
         EnvDTO env = new EnvDTO("Aveiro", "PT", new ArrayList<>(List.of(envItem1, envItem2, envItem3, envItem4)));
 
         EnvDTO currentEnv = ConverterUtils.currentEnvDTOfrom(env);

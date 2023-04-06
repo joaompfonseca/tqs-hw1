@@ -76,7 +76,8 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col">CO (μg/m³)</th>
+                    <th scope="col">Air Quality Index (AQI)</th>
+                    <th class="text-end" scope="col">CO (μg/m³)</th>
                     <th class="text-end" scope="col">NH3 (μg/m³)</th>
                     <th class="text-end" scope="col">NO (μg/m³)</th>
                     <th class="text-end" scope="col">NO2 (μg/m³)</th>
@@ -90,6 +91,13 @@
                 <tr th:each="item : ${env_current.items}">
                     <td class="text-capitalize" th:text="${#dates.format(new java.util.Date(item.dt), 'E, d')}"></td>
                     <td th:text="${#dates.format(new java.util.Date(item.dt), 'HH:mm:ss')}"></td>
+                    <div th:switch="${item.aqi}">
+                        <td th:case="1" style="background-color: red" >Awful</td>
+                        <td th:case="2" style="background-color: orange">Bad</td>
+                        <td th:case="3" style="background-color: yellow">Moderate</td>
+                        <td th:case="4" style="background-color: green">Good</td>
+                        <td th:case="5" style="background-color: limegreen">Excellent</td>
+                    </div>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.co, 1, 2)}"></td>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.nh3, 1, 2)}"></td>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no, 1, 2)}"></td>
@@ -176,6 +184,7 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col">Air Quality Index (AQI)</th>
                     <th class="text-end" scope="col">CO (μg/m³)</th>
                     <th class="text-end" scope="col">NH3 (μg/m³)</th>
                     <th class="text-end" scope="col">NO (μg/m³)</th>
@@ -190,6 +199,13 @@
                 <tr th:each="item : ${env_forecast.items}">
                     <td class="text-capitalize" th:text="${#dates.format(new java.util.Date(item.dt), 'E, d')}"></td>
                     <td th:text="${#dates.format(new java.util.Date(item.dt), 'HH:mm:ss')}"></td>
+                    <div th:switch="${item.aqi}">
+                        <td th:case="1" style="background-color: red" >Awful</td>
+                        <td th:case="2" style="background-color: orange">Bad</td>
+                        <td th:case="3" style="background-color: yellow">Moderate</td>
+                        <td th:case="4" style="background-color: green">Good</td>
+                        <td th:case="5" style="background-color: limegreen">Excellent</td>
+                    </div>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.co, 1, 2)}"></td>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.nh3, 1, 2)}"></td>
                     <td class="text-end" th:text="${#numbers.formatDecimal(item.components.no, 1, 2)}"></td>

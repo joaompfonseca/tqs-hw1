@@ -33,6 +33,7 @@ public class ConverterUtils {
             envComponents.setSo2(item.getComponents().getSo2());
             envItem.setComponents(envComponents);
             envItems.add(envItem);
+            envItem.setAqi(EnvUtils.getAqi(envComponents));
         }
         env.setItems(envItems);
         return env;
@@ -56,6 +57,7 @@ public class ConverterUtils {
             envComponents.setSo2(envData.getHourly().getSulphur_dioxide().get(i));
             envItem.setComponents(envComponents);
             envItems.add(envItem);
+            envItem.setAqi(EnvUtils.getAqi(envComponents));
         }
         env.setItems(envItems);
         return env;
