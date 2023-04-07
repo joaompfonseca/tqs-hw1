@@ -6,6 +6,8 @@ This Spring Boot based application provides information about the quality of the
 
 The main purpose of this application is to demonstrate the application of many software testing strategies such as unit tests and integration tests in JUnit 5, functional tests with Selenium and static code analysis on Sonar Cloud. A GitHub Actions workflow was put in place to automate not only these processes, but to also deploy the solution in a Microsoft Azure Web App, implementing a full CI/CD pipeline.
 
+**Repository with working CI/CD**: [Environment Monitor @ GitHub](https://github.com/joaompfonseca/tqs-hw1/)
+
 **Deployment:** [Environment Monitor @ Azure](https://env-monitor.azurewebsites.net/)
 
 **Course:** Software Testing and Quality Control (2022/2023).
